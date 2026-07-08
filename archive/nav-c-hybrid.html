@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" data-variant="C">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Credo — Services nav prototype C (hybrid)</title>
+<link rel="stylesheet" href="../shared/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="logo">CRĒDO</a>
+  <ul id="desktop-nav" class="desktop-nav"></ul>
+  <div class="header-actions">
+    <a href="#" class="book-btn">Book Consult</a>
+    <button id="menu-btn" class="menu-btn" aria-label="Open menu">☰</button>
+  </div>
+</header>
+
+<div class="variant-ribbon">
+  <div><strong>Prototype C</strong> — hybrid. Cluster click → champion LP; mega-menu carries an overview link as its header.</div>
+  <div class="switcher">
+    <a href="nav-a-overview.html">A</a>
+    <a href="nav-b-champion.html">B</a>
+    <a href="nav-c-hybrid.html" class="active">C</a>
+  </div>
+</div>
+
+<div class="ctx-selector" id="ctx-current-wrap">
+  <label for="ctx-current">Current page context (drives sibling cross-mapping):</label>
+  <select id="ctx-current"></select>
+  <small>Two entry points per cluster. Tapping the cluster name routes to the champion LP (Option B behavior). Opening the cluster's drilldown and tapping the "Overview" header at the top routes to the cluster's overview page.</small>
+</div>
+
+<main class="page-body">
+  <section class="hero">
+    <h1>Services nav · Prototype C</h1>
+    <p>Hybrid behavior. The cluster name itself goes to the champion (conversion-led default). The drilldown sub-menu has an explicit "Overview" header link at the top so visitors who want to browse the cluster have a path in. Tap a cluster name vs the chevron next to it to see both behaviors.</p>
+  </section>
+
+  <div class="trust-band">
+    <span class="pill">BBB · 4.59</span>
+    <span class="pill">Trustpilot · 4.5</span>
+    <span class="pill">Google Reviews</span>
+  </div>
+
+  <div class="placeholder-section"><strong>What We Do</strong>Page body placeholder. Same chrome as A and B.</div>
+  <div class="placeholder-section"><strong>Why Choose Credo Legal</strong>Page body placeholder.</div>
+  <div class="placeholder-section"><strong>Common Problems</strong>Page body placeholder.</div>
+  <div class="placeholder-section"><strong>How Our Program Works</strong>Page body placeholder.</div>
+  <div class="placeholder-section"><strong>Your Rights</strong>Page body placeholder.</div>
+  <div class="placeholder-section"><strong>FAQ</strong>Page body placeholder.</div>
+</main>
+
+<div class="sticky-bar">
+  <a href="#" class="cta">Get a Free Case Evaluation</a>
+  <div class="chat" aria-label="Open chat"><span>💬</span><span class="badge">2</span></div>
+</div>
+
+<div id="nav-overlay" class="nav-overlay">
+  <div class="nav-overlay-header">
+    <button class="back">‹ Back</button>
+    <div class="nav-overlay-title">Menu</div>
+    <button class="close" aria-label="Close">×</button>
+  </div>
+  <ul class="nav-list"></ul>
+</div>
+
+<div id="dest-toast" class="dest-toast"></div>
+
+<script src="../shared/data.js"></script>
+<script src="../shared/nav.js"></script>
+</body>
+</html>

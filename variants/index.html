@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6 Variants — Credo Legal Prototypes</title>
+<link rel="stylesheet" href="../shared/style.css">
+<style>
+  body { padding: 20px 16px 60px; max-width: 1200px; margin: 0 auto; }
+  h1 { font-size: 28px; margin-bottom: 6px; }
+  .intro { color: var(--text-muted); margin-bottom: 24px; line-height: 1.5; }
+  .variant-list { display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 28px; }
+  @media (min-width: 768px) { .variant-list { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1024px) { .variant-list { grid-template-columns: 1fr 1fr 1fr; } }
+  .variant-card {
+    background: white; border: 1px solid var(--border); border-radius: 12px;
+    padding: 18px; display: flex; flex-direction: column; gap: 10px;
+  }
+  .variant-card h2 { font-size: 18px; margin: 0; color: var(--brand); }
+  .variant-card .tagline { font-size: 13px; color: var(--text-muted); margin: 0; }
+  .variant-card .visitor { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+  .variant-card .matrix { font-size: 11px; line-height: 1.6; margin: 6px 0; }
+  .variant-card .matrix .row { display: flex; justify-content: space-between; padding: 3px 0; border-bottom: 1px solid var(--border-faint); }
+  .variant-card .matrix .row:last-child { border-bottom: none; }
+  .variant-card .matrix .cluster { font-weight: 600; }
+  .variant-card .matrix .lp { color: var(--text-muted); text-align: right; }
+  .variant-card .matrix .fit { font-size: 9px; padding: 1px 5px; border-radius: 6px; margin-left: 4px; }
+  .variant-card .matrix .fit-best { background: var(--amber-bg); color: #a87; }
+  .variant-card .matrix .fit-placeholder { background: #fde8e8; color: #c33; }
+  .variant-card .open {
+    background: var(--brand); color: white; text-align: center;
+    padding: 10px; border-radius: 8px; font-weight: 600; font-size: 13px;
+    margin-top: auto;
+  }
+  .variant-card .open:hover { background: var(--brand-dark); }
+  .links-row { display: flex; gap: 6px; font-size: 11px; margin-top: 4px; flex-wrap: wrap; }
+  .links-row a { color: var(--text-muted); padding: 4px 8px; background: var(--bg-surface); border-radius: 4px; border: 1px solid var(--border-faint); }
+  .links-row a:hover { background: var(--text); color: white; border-color: var(--text); }
+</style>
+</head>
+<body>
+<h1>Six angle-themed website variants</h1>
+<p class="intro">Each variant is a complete website (home + about + 6 service pages) themed around one rhetorical angle. All six share the same chrome (header, footer, D3 layout, sticky CTA, Tidio integration per <a href="../../../content/web/sites/start-redesign/brief/4-lp-template.md">brief 4</a>). What differs between variants: the homepage hero copy and which LP fills each service-page slot. For each variant, every service page picks the cluster's LP that best matches the variant's anchor angle.</p>
+
+<div class="variant-list" id="variants"></div>
+
+<p style="font-size:12px;color:var(--text-faint);margin-top:24px;line-height:1.6">
+The 36 LPs from the live captures fill the slots. Where a cluster has no perfect angle match,
+a <em>best fit</em> badge appears (yellow). The Medical Debt × Respond-in-Time slot uses the
+coming-soon placeholder (red) for the 404 URL <code>/medica-debt-lawsuit-respond</code>.
+</p>
+
+<script src="../shared/data.js"></script>
+<script src="../shared/lp-content.js"></script>
+<script src="../shared/variants.js"></script>
+<script>
+const VS = window.VARIANTS;
+const VO = window.VARIANT_ORDER;
+const LP = window.LP_CONTENT;
+const CL = window.CredoNav.CLUSTERS;
+const html = VO.map(slug => {
+  const v = VS[slug];
+  const matrix = Object.entries(v.services).map(([k, slot]) => {
+    const lp = LP[slot.lp];
+    const fitBadge = slot.fit === 'perfect' ? '' : ` <span class="fit fit-${slot.fit}">${slot.fit}</span>`;
+    return `<div class="row"><span class="cluster">${CL[k].label}</span><span class="lp">${slot.lp.replace(/-/g, ' ').replace(/var ([ab])/i, 'V$1').substring(0, 32)}${fitBadge}</span></div>`;
+  }).join('');
+  return `
+    <div class="variant-card">
+      <h2>${v.label}</h2>
+      <p class="tagline">${v.tagline}</p>
+      <p class="visitor"><em>Visitor:</em> ${v.visitor}</p>
+      <div class="matrix">${matrix}</div>
+      <a class="open" href="${slug}/index.html">Open ${v.label} →</a>
+      <div class="links-row">
+        <a href="${slug}/about.html">About</a>
+        ${Object.keys(v.services).map(k => `<a href="${slug}/services/${({harassment:'harassment',lawsuit:'lawsuit',creditCard:'credit-card',paydayLoan:'payday-loan',medicalDebt:'medical-debt',garnishment:'garnishment'})[k]}.html">${CL[k].label}</a>`).join('')}
+      </div>
+    </div>
+  `;
+}).join('');
+document.getElementById('variants').innerHTML = html;
+</script>
+</body>
+</html>

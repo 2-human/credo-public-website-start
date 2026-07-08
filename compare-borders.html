@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" data-asset-base="">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Border comparison — Credo Legal prototype</title>
+<link rel="stylesheet" href="shared/style.css">
+<style>
+  /* Compare page chrome — sits OUTSIDE the LP iframes */
+  body { padding: 0; margin: 0; background: var(--gray-100); }
+  .compare-header {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--gray-900); color: var(--text-on-dark);
+    padding: 12px 20px;
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    font-family: var(--font-sans);
+    box-shadow: var(--shadow-md);
+  }
+  .compare-header h1 { font-size: var(--fs-body-lg); margin: 0; color: var(--text-on-dark); font-weight: 600; }
+  .compare-header .meta { font-size: var(--fs-small); color: var(--gray-400); }
+  .compare-header a { color: var(--amber); text-decoration: underline; font-size: var(--fs-small); }
+  .compare-grid {
+    display: grid; grid-template-columns: 1fr; gap: 8px; padding: 8px;
+  }
+  @media (min-width: 1200px) {
+    .compare-grid { grid-template-columns: 1fr 1fr; }
+  }
+  .compare-pane {
+    background: white; border-radius: var(--radius-lg); overflow: hidden;
+    box-shadow: var(--shadow-md);
+    display: flex; flex-direction: column;
+  }
+  .compare-pane .pane-label {
+    background: var(--gray-50); border-bottom: 1px solid var(--border-faint);
+    padding: 10px 16px;
+    font-family: var(--font-sans);
+    font-size: var(--fs-small); font-weight: 600;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .compare-pane .pane-label .badge {
+    background: var(--brand); color: var(--text-on-dark);
+    padding: 2px 10px; border-radius: var(--radius-pill);
+    font-size: var(--fs-caption); text-transform: uppercase; letter-spacing: var(--tracking-wide);
+  }
+  .compare-pane .pane-label .badge.muted {
+    background: var(--gray-300); color: var(--gray-800);
+  }
+  iframe.lp-frame {
+    width: 100%; height: 1800px; border: none; display: block;
+  }
+  .compare-note {
+    background: var(--amber-bg); border-left: 3px solid var(--amber);
+    padding: 14px 18px; margin: 16px 8px;
+    font-family: var(--font-sans);
+    font-size: var(--fs-small); line-height: var(--lh-relaxed); color: var(--text);
+    border-radius: var(--radius-md);
+  }
+  .compare-note strong { color: var(--brand); }
+  .compare-note code { background: white; padding: 2px 6px; border-radius: var(--radius-sm); font-family: ui-monospace, monospace; font-size: 12px; }
+</style>
+</head>
+<body>
+
+<div class="compare-header">
+  <div>
+    <h1>Border comparison — FDCPA Education LP (Action 15)</h1>
+    <div class="meta">Vernon's note: "Try remove the black borders on the images and maybe the form too." Pick a winner.</div>
+  </div>
+  <a href="index.html">← Back to hub</a>
+</div>
+
+<div class="compare-note">
+  <strong>What's different.</strong> The "borders OFF" pane drops the 1px borders from <code>.lp-form</code>, <code>.section-side-image</code>, <code>.trust-widget</code>, and <code>.lp-trust-band</code>. Box-shadows, radii, and internal spacing are unchanged. Refresh after window resize to align panes.
+</div>
+
+<div class="compare-grid">
+
+  <div class="compare-pane">
+    <div class="pane-label">
+      <span>With borders <span style="color:var(--text-muted);font-weight:400">— current default</span></span>
+      <span class="badge muted">A</span>
+    </div>
+    <iframe class="lp-frame" src="lps/harassment/harassment-fdcpa-var-a-education.html" title="Default — with borders"></iframe>
+  </div>
+
+  <div class="compare-pane">
+    <div class="pane-label">
+      <span>Borders off <span style="color:var(--text-muted);font-weight:400">— Vernon's proposal</span></span>
+      <span class="badge">B</span>
+    </div>
+    <iframe class="lp-frame" src="lps/harassment/harassment-fdcpa-var-a-education.html?borders=off" title="Vernon's proposal — borders off"></iframe>
+  </div>
+
+</div>
+
+<div class="compare-note">
+  <strong>Wiring note.</strong> The "borders=off" variant is achieved by injecting a CSS override into the iframe URL via a query parameter the LP shell reads on load. See <code>shared/lp-template.js</code> handling of <code>?borders=off</code> in the boot block. To make this the new default, drop the borders permanently in <code>style.css</code>; to revert, no change needed.
+</div>
+
+</body>
+</html>
