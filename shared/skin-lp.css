@@ -66,7 +66,7 @@ html.sk .variant-clusters, html.sk .variant-faq { margin: 56px 0; }
 html.sk .variant-clusters .muted { font-size: 17px; color: var(--k-muted); margin: 0 0 28px; }
 
 /* ---- "Which describes you?" tiles ---- */
-html.sk .cluster-tile-grid { gap: 0; border-top: 2px solid var(--k-fg); border-left: 1px solid var(--k-border); }
+html.sk .cluster-tile-grid { gap: 0; border-top: 1px solid var(--k-border); border-left: 1px solid var(--k-border); }
 html.sk .variant-cluster-tile { background: #fff; border: 0; border-right: 1px solid var(--k-border); border-bottom: 1px solid var(--k-border); border-radius: 0; padding: 22px 22px 24px; transition: background 150ms; }
 html.sk .variant-cluster-tile:hover { background: var(--k-bg-soft); transform: none; border-color: var(--k-border); }
 html.sk .variant-cluster-tile .tile-cluster { font-size: 17px; font-weight: 600; color: var(--k-fg); margin-bottom: 8px; line-height: 1.25; }
@@ -228,8 +228,13 @@ html.sk .legal-text li { margin: 0 0 6px; }
 html.sk .legal-text a { color: var(--k-red); border-bottom: 1px solid currentColor; }
 html.sk .legal-text .legal-note { font-size: 13px; color: var(--k-muted); background: var(--k-bg-soft); border-left: 3px solid var(--k-red); padding: 14px 18px; margin: 0 0 28px; }
 html.sk .lp-form .form-steps .step { min-width: 0; }
-html.sk .lp-form .form-steps .step .step-l { min-width: 0; overflow-wrap: anywhere; }
+html.sk .lp-form .form-steps .step .step-l { min-width: 0; }
 @media (max-width: 600px) {
-  html.sk .lp-form .form-steps .step { padding: 10px 8px; gap: 6px; font-size: 9px; letter-spacing: 0.04em; }
+  html.sk .lp-form .form-steps .step { padding: 10px 6px; gap: 6px; font-size: 8px; letter-spacing: 0; }
   html.sk .lp-form .form-steps .step .step-n { width: 22px; height: 22px; }
 }
+
+/* home hero with the landing pages' form */
+html.sk .variant-hero .hero-filler { font-size: 13px; color: var(--k-muted); margin: 0 0 18px; }
+html.sk .variant-hero .hero-sub { margin-bottom: 12px; }
+html.sk .variant-hero .lp-form { max-width: 640px; }

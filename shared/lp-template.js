@@ -855,4 +855,5 @@
   window.__renderLPInnerComingSoon = renderComingSoon;
   window.__imagePlaceholder = imagePlaceholder;
   window.__renderTrustBand = trustBand;
+  window.__renderMultiStepForm = multiStepForm;
 })();

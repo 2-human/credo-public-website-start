@@ -164,13 +164,18 @@
         ? window.__imagePlaceholder(variant.home_hero_h1 + ' — illustrative image', { w: 600, h: 480 })
         : '';
     }
+    // The landing pages' form in the home hero (operator, 2 Oct 2026); phone of the variant's first service page.
+    const firstSlot = variant.services[CO[0]];
+    const firstLp = firstSlot && window.LP_CONTENT[firstSlot.lp];
+    const homeForm = window.__renderMultiStepForm ? window.__renderMultiStepForm((firstLp && firstLp.phone) || '(718) 865-8350') : '';
     return `
       <main class="variant-home">
         <section class="variant-hero-row">
           <div class="variant-hero">
             <h1>${variant.home_hero_h1}</h1>
             <p class="hero-sub">${variant.home_hero_sub}</p>
-            <a href="${base}services/${CLUSTER_SLUG[CO[0]]}.html" class="primary-cta">Find your situation ↓</a>
+            <p class="hero-filler">Fill in the form below or call us for a free review of your case.</p>
+            ${homeForm}
           </div>
           <div class="variant-hero-image" aria-hidden="true">${heroImg}</div>
         </section>
@@ -192,8 +197,6 @@
             <li><span class="step-num">4</span><div><strong>Action</strong> — if you move forward, we handle the filings, letters, and follow-up.</div></li>
           </ol>
         </section>
-
-        ${trustBand({ withMetrics: true })}
 
         <section class="variant-faq">
           <h2>Common questions</h2>
