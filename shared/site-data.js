@@ -47,6 +47,7 @@ window.CREDO_SITE_DATA = {
    "slug": "stop-calls",
    "label": "Stop the Calls",
    "tagline": "Relief from collector harassment",
+   "promise": "End the harassment. Stop the calls.",
    "home": "harassment",
    "homeH1": [
     "Stop the calls. ",
@@ -111,6 +112,7 @@ window.CREDO_SITE_DATA = {
    "slug": "fight-back",
    "label": "Fight Back",
    "tagline": "Pursue damages, hold them accountable",
+   "promise": "They broke the law. We help you sue them.",
    "home": "harassment",
    "homeH1": [
     "Fight back. They ",
@@ -175,6 +177,7 @@ window.CREDO_SITE_DATA = {
    "slug": "respond-in-time",
    "label": "Respond in Time",
    "tagline": "Deadline urgency: don't miss the window",
+   "promise": "Don't miss the deadline. Respond on time.",
    "home": "lawsuit",
    "homeH1": [
     "You have a deadline. We help you ",
@@ -239,6 +242,7 @@ window.CREDO_SITE_DATA = {
    "slug": "demand-proof",
    "label": "Demand Proof",
    "tagline": "Make them prove the debt",
+   "promise": "Don't pay debt they can't prove.",
    "home": "lawsuit",
    "homeH1": [
     "Make them ",
@@ -303,6 +307,7 @@ window.CREDO_SITE_DATA = {
    "slug": "know-your-rights",
    "label": "Know Your Rights",
    "tagline": "Plain-English legal education",
+   "promise": "Know what the law gives you. Before you do anything.",
    "home": "harassment",
    "homeH1": [
     "You have ",
@@ -367,6 +372,7 @@ window.CREDO_SITE_DATA = {
    "slug": "reduce-or-remove",
    "label": "Reduce or Remove",
    "tagline": "Outcome-focused: settle, exempt, remove",
+   "promise": "Reduce what you owe. Remove what you don't.",
    "home": "creditCard",
    "homeH1": [
     "You may owe ",

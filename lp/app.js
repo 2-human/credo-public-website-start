@@ -948,6 +948,6 @@
   window.CredoLP = {
     render: render,
     renderPage: renderPage,
-    parts: { esc: esc, pad2: pad2, SectionNo: SectionNo, ReviewBar: ReviewBar, HowItWorks: HowItWorks, FAQ: FAQ, BottomCTA: BottomCTA, InlineCTA: InlineCTA }
+    parts: { HeroFigure: HeroFigure, esc: esc, pad2: pad2, SectionNo: SectionNo, ReviewBar: ReviewBar, HowItWorks: HowItWorks, FAQ: FAQ, BottomCTA: BottomCTA, InlineCTA: InlineCTA }
   };
 })();

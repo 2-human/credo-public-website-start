@@ -774,3 +774,8 @@ html[data-borders="off"] .multi-opt { border-bottom-color: var(--border-soft); }
 .page .page-block .after { margin: 28px 0 0; font-size: var(--fs-body); }
 .page .page-block .after a { color: var(--credo-red); border-bottom: 1px solid currentColor; }
 .page .page-trust { padding-bottom: 72px; }
+/* Home page of the website prototype: hero with a button instead of the form */
+.home-hero .hero-cta { margin-top: 36px; }
+.home-hero .hero-cta a.btn-stamp, .bottom-cta a.btn-stamp { display: inline-flex; }
+#services, #process, #faq { scroll-margin-top: 72px; }
+.nav-site ~ main #lead-form { scroll-margin-top: 84px; }

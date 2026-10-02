@@ -48,8 +48,8 @@
           }) },
         { text: "About", href: b + "about.html", current: c.page === "about" }
       ],
-      /* Pages without a form send the nav button to the form on the home page. */
-      cta: (c.page === "home" || c.page === "service") ? null : { href: b + "index.html#lead-form" }
+      /* Pages without a form (home, about, legal) send the button to the form on the variant's anchor service page. */
+      cta: c.page === "service" ? null : { href: formHref() }
     };
 
     C.footer = {
@@ -72,11 +72,10 @@
       copyright: "© 2026 Credo Legal. All rights reserved."
     };
 
-    if (c.page === "home") {
-      C.hero.h1 = V.homeH1;
-      C.hero.lede = V.homeSub;
-      C.hero.eyebrow = V.label;
-    }
+  }
+  function formHref() {
+    var V = D.variants[cfg.variant];
+    return cfg.base + "services/" + D.clusters[V.home].slug + ".html#lead-form";
   }
 
   /* ---- home: the six services ------------------------------------------- */
@@ -93,9 +92,66 @@
     }).join("");
     return '<section class="section" id="services"><div class="container">' +
       '<div class="eyebrow">Our services</div>' +
-      '<h2 class="h2">' + esc(V.clusterLead) + '</h2>' +
+      '<h2 class="h2">Which describes you?</h2>' +
+      '<p class="wwd-lede">' + esc(V.clusterLead) + '</p>' +
       '<div class="svc-grid">' + tiles + '</div>' +
     '</div></section>';
+  }
+
+  /* ---- home ---------------------------------------------------------------
+     Layout of the first website prototype (hero with one button, trust strip, "Which describes you?",
+     how it works, trust strip with figures, common questions, closing promise) in the landing-page
+     styles. No form: the home page routes visitors to the service page that fits them. */
+  var HOME_STEPS = [
+    ["Free consultation", "Tell us what's happening. No cost, no commitment."],
+    ["Case review", "Our attorneys examine the debt, the conduct, and the legal claims available to you."],
+    ["Recommendation", "We explain your options and which one fits your situation best."],
+    ["Action", "If you move forward, we handle the filings, letters, and follow-up."]
+  ];
+  var HOME_FAQ = [
+    ["How much does it cost?", "Your consultation is free. Fees are set out in a written engagement agreement before any work starts, and we offer flexible payment plans."],
+    ["Where do you practice?", "Our attorneys are licensed across most US states. We currently do not serve DC, DE, ID, NC, OK, WV, or WY, and we tell you at intake whether we can take your case."],
+    ["What kinds of debt do you handle?", "Credit card, medical, payday and personal loans, utilities, and auto repossession. We do not handle student loans, tax debt, child support, or government debt."]
+  ];
+  function homeHtml() {
+    var V = D.variants[cfg.variant], C = window.CREDO, P = window.CredoLP.parts;
+    var h1 = esc(V.homeH1[0]) + "<em>" + esc(V.homeH1[1]) + "</em>" + esc(V.homeH1[2]);
+    return '' +
+      '<section class="hero home-hero" id="top"><div class="container"><div class="hero-grid">' +
+        '<div>' +
+          '<h1 class="h1">' + h1 + '</h1>' +
+          '<p class="lede">' + esc(V.homeSub) + '</p>' +
+          '<div class="hero-cta">' +
+            '<a class="btn-stamp" href="#services">Find your situation <span class="ar">↓</span></a>' +
+            '<a class="hero-call" href="' + C.phoneHref + '">Or call <b>' + C.phone + '</b></a>' +
+          '</div>' +
+        '</div>' +
+        '<div>' + P.HeroFigure(false) + '</div>' +
+      '</div></div></section>' +
+      '<div class="container" style="padding-top:0">' + P.ReviewBar(false) + '</div>' +
+      servicesSection() +
+      '<section class="section alt" id="process"><div class="container">' +
+        '<div class="eyebrow">How it works</div>' +
+        '<h2 class="h2">Four steps, starting with a free conversation.</h2>' +
+        '<div class="process cols" style="margin-top:28px">' + HOME_STEPS.map(function (r, i) {
+          return '<div class="step"><div class="n">' + P.pad2(i + 1) + '</div><div><h3>' + esc(r[0]) + '</h3><p>' + esc(r[1]) + '</p></div></div>';
+        }).join("") + '</div>' +
+      '</div></section>' +
+      '<div class="container">' + P.ReviewBar(true) + '</div>' +
+      '<section class="section" id="faq"><div class="container">' +
+        '<div class="eyebrow">Common questions</div>' +
+        '<h2 class="h2">Questions, answered plainly.</h2>' +
+        '<div class="faq faq-static" style="margin-top:28px">' + HOME_FAQ.map(function (qa) {
+          return '<div class="qa open"><div class="q">' + esc(qa[0]) + '</div><div class="a"><p>' + esc(qa[1]) + '</p></div></div>';
+        }).join("") + '</div>' +
+      '</div></section>' +
+      '<section class="bottom-cta"><div class="container">' +
+        '<div class="eyebrow">Ready when you are</div>' +
+        '<h2>' + esc(V.promise) + '</h2>' +
+        '<p>An attorney reviews every case. The first conversation is free.</p>' +
+        '<a class="btn-stamp" href="' + formHref() + '">Get a free case evaluation <span class="ar">→</span></a>' +
+        '<div class="bphone">Or call <a href="' + C.phoneHref + '">' + C.phone + '</a></div>' +
+      '</div></section>';
   }
 
   /* ---- page templates ---------------------------------------------------- */
@@ -113,7 +169,7 @@
       '<div class="eyebrow">Ready when you are</div>' +
       '<h2>Know your rights before you make any <em>decision</em>.</h2>' +
       '<p>' + C.bottomCta.body + '</p>' +
-      '<a class="btn-stamp" href="' + cfg.base + 'index.html#lead-form">' + esc(label || C.bottomCta.cta) + ' <span class="ar">→</span></a>' +
+      '<a class="btn-stamp" href="' + formHref() + '">' + esc(label || C.bottomCta.cta) + ' <span class="ar">→</span></a>' +
       '<div class="bphone">Or call <a href="' + C.phoneHref + '">' + C.phone + '</a></div>' +
     '</div></section>';
   }
@@ -190,17 +246,16 @@
 
   function render() {
     var L = window.CredoLP, p = cfg.page;
-    if (p === "home" || p === "service") {
+    if (p === "service") {
       L.render({ variant: "a", hero: "portrait" });
-      if (p === "home") {
-        var bar = document.querySelector("main .reviewbar");
-        if (bar && bar.parentNode) bar.parentNode.insertAdjacentHTML("afterend", servicesSection());
-      }
       /* arriving from another page's "Free review" button */
       if (location.hash === "#lead-form") {
         var f = document.getElementById("lead-form");
-        if (f) window.scrollTo(0, f.getBoundingClientRect().top + window.scrollY - 72);   /* clear the sticky nav */
+        if (f) window.addEventListener("load", function () { f.scrollIntoView(); });   /* scroll-margin in lp.css clears the sticky nav */
       }
+    } else if (p === "home") {
+      document.documentElement.setAttribute("data-hero-style", "portrait");
+      L.renderPage({ html: homeHtml() });
     } else if (p === "about") {
       L.renderPage({ html: aboutHtml() });
     } else if (p === "thanks") {
