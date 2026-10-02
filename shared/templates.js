@@ -132,11 +132,7 @@
           <a href="#chooser" class="cta-link">Find your situation ↓</a>
         </section>
 
-        <div class="trust-band">
-          <span class="pill">BBB · 4.59</span>
-          <span class="pill">Trustpilot · 4.5</span>
-          <span class="pill">Google Reviews</span>
-        </div>
+        ${trustBand()}
 
         <section id="chooser" class="cluster-chooser">
           <h2>Which best describes your situation?</h2>
@@ -197,11 +193,7 @@
 
         <div class="placeholder-section"><strong>Engagement model</strong>Monthly subscription. A flat monthly fee covers the legal work: validation attempts, court representation if you're sued, settlement negotiation when it's the best outcome. The program typically runs 18–24 months. This model differentiates us from debt-settlement companies (who direct payments toward settlement pots) and from contingency-fee attorneys (who take a cut of recovery).</div>
 
-        <div class="trust-band">
-          <span class="pill">BBB · 4.59</span>
-          <span class="pill">Trustpilot · 4.5</span>
-          <span class="pill">Google Reviews</span>
-        </div>
+        ${trustBand()}
       </main>
       <div class="sticky-bar">
         <a href="#" class="cta">Get a Free Case Evaluation</a>
@@ -218,15 +210,38 @@
   }
 
   // Reusable trust band, multi-step form stub, and LP body section renderers.
-  function trustBand() {
+  // Trust strip as on the live landing pages (staging.credolegal.com, 2 Oct 2026): the Trustpilot
+  // widget and the BBB seal, with the two figures below. The same embeds as the live pages.
+  function liveTrustStrip() {
+    setTimeout(function () {
+      if (window.Trustpilot && window.Trustpilot.loadFromElement) {
+        document.querySelectorAll('.trustpilot-widget:not([data-tp-done])').forEach(function (el) { el.setAttribute('data-tp-done', '1'); window.Trustpilot.loadFromElement(el, true); });
+      } else if (!document.getElementById('tp-bootstrap')) {
+        var s = document.createElement('script'); s.id = 'tp-bootstrap'; s.async = true;
+        s.src = 'https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js';
+        document.head.appendChild(s);
+      }
+    }, 0);
     return `
-      <div class="trust-band">
-        <span class="pill">BBB · 4.59</span>
-        <span class="pill">Trustpilot · 4.5</span>
-        <span class="pill">Google Reviews</span>
+      <div class="live-trust">
+        <div class="lt-badges">
+          <div class="lt-cell">
+            <div class="trustpilot-widget" data-locale="en-US" data-template-id="53aa8807dec7e10d38f59f32" data-businessunit-id="66f1b872822deaf8e3b0c570" data-style-height="150px" data-style-width="100%" data-token="6137cfd2-eaf3-4249-b1cc-4c3f351d81b0">
+              <a href="https://www.trustpilot.com/review/credolegal.com" target="_blank" rel="noopener">Trustpilot</a>
+            </div>
+          </div>
+          <div class="lt-cell">
+            <a href="https://www.bbb.org/us/fl/jacksonville/profile/legal-services/credo-legal-services-p-a-0403-236025533/#sealclick" target="_blank" rel="nofollow noopener"><img src="https://seal-northeastflorida.bbb.org/seals/blue-seal-293-61-bbb-236025533.png" width="384" height="80" loading="lazy" alt="Credo Legal Services, P.C. BBB Business Review"></a>
+          </div>
+        </div>
+        <div class="lt-facts">
+          <div class="lt-fact"><span class="lt-n">10 million+</span><span class="lt-l">In debt wiped</span></div>
+          <div class="lt-fact"><span class="lt-n">500k</span><span class="lt-l">Debts settled every month</span></div>
+        </div>
       </div>
     `;
   }
+  function trustBand() { return window.__renderTrustBand ? window.__renderTrustBand() : liveTrustStrip(); }
 
   function multiStepForm(phone) {
     const phoneNum = phone.replace(/[^0-9]/g, '');

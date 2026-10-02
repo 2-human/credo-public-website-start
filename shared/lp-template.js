@@ -408,27 +408,38 @@
     `;
   }
 
-  function trustBand(opts) {
-    opts = opts || {};
-    const metrics = opts.withMetrics ? `
-      <div class="trust-metrics">
-        <div class="metric"><span class="metric-n">10,000+</span><span class="metric-l">Cases Won</span></div>
-        <div class="metric-divider" aria-hidden="true"></div>
-        <div class="metric"><span class="metric-n">$84M+</span><span class="metric-l">In Debt Wiped</span></div>
-        <div class="metric-divider" aria-hidden="true"></div>
-        <div class="metric"><span class="metric-n">18,500+</span><span class="metric-l">Clients Defended</span></div>
-      </div>` : '';
+  // Trust strip as on the live landing pages (staging.credolegal.com, 2 Oct 2026): the Trustpilot
+  // widget and the BBB seal, with the two figures below. The same embeds as the live pages.
+  function liveTrustStrip() {
+    setTimeout(function () {
+      if (window.Trustpilot && window.Trustpilot.loadFromElement) {
+        document.querySelectorAll('.trustpilot-widget:not([data-tp-done])').forEach(function (el) { el.setAttribute('data-tp-done', '1'); window.Trustpilot.loadFromElement(el, true); });
+      } else if (!document.getElementById('tp-bootstrap')) {
+        var s = document.createElement('script'); s.id = 'tp-bootstrap'; s.async = true;
+        s.src = 'https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js';
+        document.head.appendChild(s);
+      }
+    }, 0);
     return `
-      <div class="lp-trust-band${opts.withMetrics ? ' lp-trust-band-with-metrics' : ''}">
-        <div class="trust-row">
-          ${bbbWidget()}
-          ${trustpilotWidget()}
-          ${googleReviewsWidget()}
+      <div class="live-trust">
+        <div class="lt-badges">
+          <div class="lt-cell">
+            <div class="trustpilot-widget" data-locale="en-US" data-template-id="53aa8807dec7e10d38f59f32" data-businessunit-id="66f1b872822deaf8e3b0c570" data-style-height="150px" data-style-width="100%" data-token="6137cfd2-eaf3-4249-b1cc-4c3f351d81b0">
+              <a href="https://www.trustpilot.com/review/credolegal.com" target="_blank" rel="noopener">Trustpilot</a>
+            </div>
+          </div>
+          <div class="lt-cell">
+            <a href="https://www.bbb.org/us/fl/jacksonville/profile/legal-services/credo-legal-services-p-a-0403-236025533/#sealclick" target="_blank" rel="nofollow noopener"><img src="https://seal-northeastflorida.bbb.org/seals/blue-seal-293-61-bbb-236025533.png" width="384" height="80" loading="lazy" alt="Credo Legal Services, P.C. BBB Business Review"></a>
+          </div>
         </div>
-        ${metrics}
+        <div class="lt-facts">
+          <div class="lt-fact"><span class="lt-n">10 million+</span><span class="lt-l">In debt wiped</span></div>
+          <div class="lt-fact"><span class="lt-n">500k</span><span class="lt-l">Debts settled every month</span></div>
+        </div>
       </div>
     `;
   }
+  function trustBand() { return liveTrustStrip(); }
 
   // Action 1 (post-review 2026-06-02): NC added per Sona's comment.
   // Canonical no-service state list — bake into the Webflow build copy.
