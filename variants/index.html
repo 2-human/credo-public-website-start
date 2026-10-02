@@ -1,85 +1,121 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>6 Variants — Credo Legal Prototypes</title>
-<link rel="stylesheet" href="../shared/style.css">
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Credo Legal | Website prototype · six variants</title>
+<meta name="robots" content="noindex"/>
+<link rel="stylesheet" href="../lp/tokens.css"/>
+<link rel="stylesheet" href="../lp/lp.css"/>
 <style>
-  body { padding: 20px 16px 60px; max-width: 1200px; margin: 0 auto; }
-  h1 { font-size: 28px; margin-bottom: 6px; }
-  .intro { color: var(--text-muted); margin-bottom: 24px; line-height: 1.5; }
-  .variant-list { display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 28px; }
-  @media (min-width: 768px) { .variant-list { grid-template-columns: 1fr 1fr; } }
-  @media (min-width: 1024px) { .variant-list { grid-template-columns: 1fr 1fr 1fr; } }
-  .variant-card {
-    background: white; border: 1px solid var(--border); border-radius: 12px;
-    padding: 18px; display: flex; flex-direction: column; gap: 10px;
-  }
-  .variant-card h2 { font-size: 18px; margin: 0; color: var(--brand); }
-  .variant-card .tagline { font-size: 13px; color: var(--text-muted); margin: 0; }
-  .variant-card .visitor { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
-  .variant-card .matrix { font-size: 11px; line-height: 1.6; margin: 6px 0; }
-  .variant-card .matrix .row { display: flex; justify-content: space-between; padding: 3px 0; border-bottom: 1px solid var(--border-faint); }
-  .variant-card .matrix .row:last-child { border-bottom: none; }
-  .variant-card .matrix .cluster { font-weight: 600; }
-  .variant-card .matrix .lp { color: var(--text-muted); text-align: right; }
-  .variant-card .matrix .fit { font-size: 9px; padding: 1px 5px; border-radius: 6px; margin-left: 4px; }
-  .variant-card .matrix .fit-best { background: var(--amber-bg); color: #a87; }
-  .variant-card .matrix .fit-placeholder { background: #fde8e8; color: #c33; }
-  .variant-card .open {
-    background: var(--brand); color: white; text-align: center;
-    padding: 10px; border-radius: 8px; font-weight: 600; font-size: 13px;
-    margin-top: auto;
-  }
-  .variant-card .open:hover { background: var(--brand-dark); }
-  .links-row { display: flex; gap: 6px; font-size: 11px; margin-top: 4px; flex-wrap: wrap; }
-  .links-row a { color: var(--text-muted); padding: 4px 8px; background: var(--bg-surface); border-radius: 4px; border: 1px solid var(--border-faint); }
-  .links-row a:hover { background: var(--text); color: white; border-color: var(--text); }
+  .hub-head { padding: 48px 0 28px; border-bottom: 2px solid var(--fg); }
+  .hub-head img { height: 40px; width: auto; margin-bottom: 28px; }
+  .hub-head h1 { font-size: clamp(30px, 4vw, 46px); font-weight: var(--fw-medium); letter-spacing: -0.02em; line-height: 1.1; margin: 8px 0 14px; }
+  .hub-head p { max-width: 760px; color: var(--fg-muted); line-height: 1.6; margin: 0 0 8px; }
+  .hv { padding: 40px 0; border-bottom: 1px solid var(--border); }
+  .hv h2 { font-size: 26px; font-weight: var(--fw-semi); margin: 6px 0 6px; }
+  .hv .who { color: var(--fg-muted); max-width: 760px; line-height: 1.55; margin: 0 0 18px; }
+  .hv .links { display: flex; flex-wrap: wrap; gap: 10px 22px; margin: 0 0 6px; font-size: 11px; font-weight: var(--fw-bold); letter-spacing: var(--tracking-widest); text-transform: uppercase; }
+  .hv .links a { color: var(--credo-red); }
+  .svc .fit { color: var(--credo-red); }
+  .svc .fit.best { color: var(--fg-muted); }
+  .hub-foot { padding: 28px 0 56px; color: var(--fg-muted); font-size: var(--fs-body-sm); line-height: 1.6; }
 </style>
 </head>
 <body>
-<h1>Six angle-themed website variants</h1>
-<p class="intro">Each variant is a complete website (home + about + 6 service pages) themed around one rhetorical angle. All six share the same chrome (header, footer, D3 layout, sticky CTA, Tidio integration per <a href="../../../content/web/sites/start-redesign/brief/4-lp-template.md">brief 4</a>). What differs between variants: the homepage hero copy and which LP fills each service-page slot. For each variant, every service page picks the cluster's LP that best matches the variant's anchor angle.</p>
-
-<div class="variant-list" id="variants"></div>
-
-<p style="font-size:12px;color:var(--text-faint);margin-top:24px;line-height:1.6">
-The 36 LPs from the live captures fill the slots. Where a cluster has no perfect angle match,
-a <em>best fit</em> badge appears (yellow). The Medical Debt × Respond-in-Time slot uses the
-coming-soon placeholder (red) for the 404 URL <code>/medica-debt-lawsuit-respond</code>.
-</p>
-
-<script src="../shared/data.js"></script>
-<script src="../shared/lp-content.js"></script>
-<script src="../shared/variants.js"></script>
-<script>
-const VS = window.VARIANTS;
-const VO = window.VARIANT_ORDER;
-const LP = window.LP_CONTENT;
-const CL = window.CredoNav.CLUSTERS;
-const html = VO.map(slug => {
-  const v = VS[slug];
-  const matrix = Object.entries(v.services).map(([k, slot]) => {
-    const lp = LP[slot.lp];
-    const fitBadge = slot.fit === 'perfect' ? '' : ` <span class="fit fit-${slot.fit}">${slot.fit}</span>`;
-    return `<div class="row"><span class="cluster">${CL[k].label}</span><span class="lp">${slot.lp.replace(/-/g, ' ').replace(/var ([ab])/i, 'V$1').substring(0, 32)}${fitBadge}</span></div>`;
-  }).join('');
-  return `
-    <div class="variant-card">
-      <h2>${v.label}</h2>
-      <p class="tagline">${v.tagline}</p>
-      <p class="visitor"><em>Visitor:</em> ${v.visitor}</p>
-      <div class="matrix">${matrix}</div>
-      <a class="open" href="${slug}/index.html">Open ${v.label} →</a>
-      <div class="links-row">
-        <a href="${slug}/about.html">About</a>
-        ${Object.keys(v.services).map(k => `<a href="${slug}/services/${({harassment:'harassment',lawsuit:'lawsuit',creditCard:'credit-card',paydayLoan:'payday-loan',medicalDebt:'medical-debt',garnishment:'garnishment'})[k]}.html">${CL[k].label}</a>`).join('')}
-      </div>
-    </div>
-  `;
-}).join('');
-document.getElementById('variants').innerHTML = html;
-</script>
+<main><div class="lp">
+<div class="container hub-head">
+  <img src="../lp/assets/credo-logo.png" alt="Credo Legal"/>
+  <div class="eyebrow">Website prototype</div>
+  <h1>Six site variants, one design.</h1>
+  <p>Each variant is a complete site built around one angle: a home page, six service pages, an about page, and the Terms of Use, Privacy Policy and Cookie Policy. Every page uses the landing-page design as it is on Webflow today (staging.credolegal.com) and today's landing-page copy.</p>
+  <p>"Perfect fit" means the cluster has a landing page at exactly that angle. "Best fit" is the closest available page.</p>
+</div>
+<section class="hv"><div class="container">
+  <div class="eyebrow">Variant 01 · Relief from collector harassment</div>
+  <h2>Stop the Calls</h2>
+  <p class="who">Someone whose phone won't stop ringing: collectors before 8 AM, threats of arrest, calls to family or work. They want the calls to stop now.</p>
+  <div class="links"><a href="stop-calls/index.html">Open the site →</a><a href="stop-calls/about.html">About</a><a href="stop-calls/terms-of-use.html">Terms of Use</a><a href="stop-calls/privacy-policy.html">Privacy Policy</a><a href="stop-calls/cookie-policy.html">Cookie Policy</a></div>
+  <div class="svc-grid">
+    <a class="svc" href="stop-calls/services/harassment.html"><div class="sm"><span>01 · Collector harassment</span><span class="fit perfect">perfect fit</span></div><h3>Debt Collectors Won't Stop Calling?</h3><p>Our Attorneys Can Make Them Stop.</p></a>
+    <a class="svc" href="stop-calls/services/lawsuit.html"><div class="sm"><span>02 · Debt lawsuit</span><span class="fit best">best fit</span></div><h3>You've Been Served Papers?</h3><p>Lawsuit equivalent of &quot;stop the calls&quot;: act-now framing on a fresh summons.</p></a>
+    <a class="svc" href="stop-calls/services/credit-card.html"><div class="sm"><span>03 · Credit card debt</span><span class="fit perfect">perfect fit</span></div><h3>Credit Card Debt Collector Calling You?</h3><p>Our Attorneys Can Help Make Them Stop.</p></a>
+    <a class="svc" href="stop-calls/services/payday-loan.html"><div class="sm"><span>04 · Payday loans</span><span class="fit perfect">perfect fit</span></div><h3>Payday Lenders Calling Aggressively?</h3><p>Our Attorneys Can Help Make Them Stop.</p></a>
+    <a class="svc" href="stop-calls/services/medical-debt.html"><div class="sm"><span>05 · Medical debt</span><span class="fit perfect">perfect fit</span></div><h3>Struggling With Medical Debt?</h3><p>Our Attorneys Can Help You Fight Harassment &amp; Challenge Debt.</p></a>
+    <a class="svc" href="stop-calls/services/garnishment.html"><div class="sm"><span>06 · Wage garnishment</span><span class="fit best">best fit</span></div><h3>How to Stop a Wage Garnishment</h3><p>Garnishment equivalent of &quot;stop&quot;: fight the garnishment.</p></a>
+  </div>
+</div></section>
+<section class="hv"><div class="container">
+  <div class="eyebrow">Variant 02 · Pursue damages, hold them accountable</div>
+  <h2>Fight Back</h2>
+  <p class="who">Someone done waiting it out: wants to know what they can recover, who they can sue, and what the law gives them as leverage.</p>
+  <div class="links"><a href="fight-back/index.html">Open the site →</a><a href="fight-back/about.html">About</a><a href="fight-back/terms-of-use.html">Terms of Use</a><a href="fight-back/privacy-policy.html">Privacy Policy</a><a href="fight-back/cookie-policy.html">Cookie Policy</a></div>
+  <div class="svc-grid">
+    <a class="svc" href="fight-back/services/harassment.html"><div class="sm"><span>01 · Collector harassment</span><span class="fit perfect">perfect fit</span></div><h3>Need a Consumer Debt Attorney?</h3><p>We Explain Your Rights Against Debt Harassment under FDCPA for Free.</p></a>
+    <a class="svc" href="fight-back/services/lawsuit.html"><div class="sm"><span>02 · Debt lawsuit</span><span class="fit perfect">perfect fit</span></div><h3>Is a Creditor Suing You?</h3><p>Our Attorneys Can Help You Challenge Their Claims.</p></a>
+    <a class="svc" href="fight-back/services/credit-card.html"><div class="sm"><span>03 · Credit card debt</span><span class="fit perfect">perfect fit</span></div><h3>Credit Card Debt Collectors After You?</h3><p>Our Attorneys Can Help Make Them Pay.</p></a>
+    <a class="svc" href="fight-back/services/payday-loan.html"><div class="sm"><span>04 · Payday loans</span><span class="fit perfect">perfect fit</span></div><h3>Payday Loan Broke the Law?</h3><p>Our Attorneys Can Check Legality and Build Your Case.</p></a>
+    <a class="svc" href="fight-back/services/medical-debt.html"><div class="sm"><span>05 · Medical debt</span><span class="fit best">best fit</span></div><h3>Medical Bills Look Wrong?</h3><p>Medical equivalent: challenge the bills.</p></a>
+    <a class="svc" href="fight-back/services/garnishment.html"><div class="sm"><span>06 · Wage garnishment</span><span class="fit perfect">perfect fit</span></div><h3>Is Your Paycheck Being Garnished?</h3><p>Our Attorneys Can Challenge Their Claims and Fight for Your Paycheck.</p></a>
+  </div>
+</div></section>
+<section class="hv"><div class="container">
+  <div class="eyebrow">Variant 03 · Deadline urgency: don't miss the window</div>
+  <h2>Respond in Time</h2>
+  <p class="who">Someone holding a summons or notice with a date on it. They need to act before something irreversible happens.</p>
+  <div class="links"><a href="respond-in-time/index.html">Open the site →</a><a href="respond-in-time/about.html">About</a><a href="respond-in-time/terms-of-use.html">Terms of Use</a><a href="respond-in-time/privacy-policy.html">Privacy Policy</a><a href="respond-in-time/cookie-policy.html">Cookie Policy</a></div>
+  <div class="svc-grid">
+    <a class="svc" href="respond-in-time/services/harassment.html"><div class="sm"><span>01 · Collector harassment</span><span class="fit best">best fit</span></div><h3>Let's See If We Can Help You with Creditor Harassment and Debt</h3><p>Harassment equivalent: act fast on the FDCPA timeline.</p></a>
+    <a class="svc" href="respond-in-time/services/lawsuit.html"><div class="sm"><span>02 · Debt lawsuit</span><span class="fit perfect">perfect fit</span></div><h3>Debt Collector Suing You?</h3><p>Account champion.</p></a>
+    <a class="svc" href="respond-in-time/services/credit-card.html"><div class="sm"><span>03 · Credit card debt</span><span class="fit perfect">perfect fit</span></div><h3>Sued for Credit Card Debt?</h3><p>Our Attorneys Can Help You Respond On Time.</p></a>
+    <a class="svc" href="respond-in-time/services/payday-loan.html"><div class="sm"><span>04 · Payday loans</span><span class="fit perfect">perfect fit</span></div><h3>Payday Lender Suing You?</h3><p>Our Attorneys Can Help You Act On Time.</p></a>
+    <a class="svc" href="respond-in-time/services/medical-debt.html"><div class="sm"><span>05 · Medical debt</span><span class="fit perfect">perfect fit</span></div><h3>Medical Debt Collector Suing You?</h3><p>Our Attorneys Can Help You Respond On Time.</p></a>
+    <a class="svc" href="respond-in-time/services/garnishment.html"><div class="sm"><span>06 · Wage garnishment</span><span class="fit best">best fit</span></div><h3>Garnishment Looming?</h3><p>Garnishment equivalent: prevent garnishment before judgment.</p></a>
+  </div>
+</div></section>
+<section class="hv"><div class="container">
+  <div class="eyebrow">Variant 04 · Make them prove the debt</div>
+  <h2>Demand Proof</h2>
+  <p class="who">Someone who suspects the debt isn't legitimate: wrong amount, doesn't recognize it, sold between collectors. They want to challenge before paying.</p>
+  <div class="links"><a href="demand-proof/index.html">Open the site →</a><a href="demand-proof/about.html">About</a><a href="demand-proof/terms-of-use.html">Terms of Use</a><a href="demand-proof/privacy-policy.html">Privacy Policy</a><a href="demand-proof/cookie-policy.html">Cookie Policy</a></div>
+  <div class="svc-grid">
+    <a class="svc" href="demand-proof/services/harassment.html"><div class="sm"><span>01 · Collector harassment</span><span class="fit best">best fit</span></div><h3>Debt Collectors Won't Stop Calling?</h3><p>Harassment equivalent: evidence of each violation.</p></a>
+    <a class="svc" href="demand-proof/services/lawsuit.html"><div class="sm"><span>02 · Debt lawsuit</span><span class="fit perfect">perfect fit</span></div><h3>Debt Collector Suing You?</h3><p>Our Attorneys Can Help You Challenge Their Claims.</p></a>
+    <a class="svc" href="demand-proof/services/credit-card.html"><div class="sm"><span>03 · Credit card debt</span><span class="fit perfect">perfect fit</span></div><h3>Sued for Credit Card Debt?</h3><p>Our Attorneys Find Errors and Challenge Their Claims.</p></a>
+    <a class="svc" href="demand-proof/services/payday-loan.html"><div class="sm"><span>04 · Payday loans</span><span class="fit perfect">perfect fit</span></div><h3>Payday Loan Debt Seems Wrong?</h3><p>Our Attorneys Can Help You Dispute It.</p></a>
+    <a class="svc" href="demand-proof/services/medical-debt.html"><div class="sm"><span>05 · Medical debt</span><span class="fit perfect">perfect fit</span></div><h3>Medical Bills Look Wrong?</h3><p>Our Attorneys Can Help You Challenge Their Claims.</p></a>
+    <a class="svc" href="demand-proof/services/garnishment.html"><div class="sm"><span>06 · Wage garnishment</span><span class="fit best">best fit</span></div><h3>Is Your Paycheck Being Garnished?</h3><p>Garnishment equivalent: challenge the underlying judgment.</p></a>
+  </div>
+</div></section>
+<section class="hv"><div class="container">
+  <div class="eyebrow">Variant 05 · Plain-English legal education</div>
+  <h2>Know Your Rights</h2>
+  <p class="who">Someone in the research phase. Not panicked yet. Wants to understand the law before deciding whether to pay, dispute, settle, or ignore.</p>
+  <div class="links"><a href="know-your-rights/index.html">Open the site →</a><a href="know-your-rights/about.html">About</a><a href="know-your-rights/terms-of-use.html">Terms of Use</a><a href="know-your-rights/privacy-policy.html">Privacy Policy</a><a href="know-your-rights/cookie-policy.html">Cookie Policy</a></div>
+  <div class="svc-grid">
+    <a class="svc" href="know-your-rights/services/harassment.html"><div class="sm"><span>01 · Collector harassment</span><span class="fit perfect">perfect fit</span></div><h3>Our Attorneys Can Explain Your Rights and Act.</h3><p>Account champion for the harassment angle.</p></a>
+    <a class="svc" href="know-your-rights/services/lawsuit.html"><div class="sm"><span>02 · Debt lawsuit</span><span class="fit best">best fit</span></div><h3>Is a Creditor Suing You?</h3><p>Lawsuit equivalent: how an attorney levels the field.</p></a>
+    <a class="svc" href="know-your-rights/services/credit-card.html"><div class="sm"><span>03 · Credit card debt</span><span class="fit best">best fit</span></div><h3>Got Credit Card Debt?</h3><p>Credit card equivalent: negotiation and validation options.</p></a>
+    <a class="svc" href="know-your-rights/services/payday-loan.html"><div class="sm"><span>04 · Payday loans</span><span class="fit perfect">perfect fit</span></div><h3>Confused About Payday Loan Rights?</h3><p>Our Attorneys Can Help You Understand Them and Act.</p></a>
+    <a class="svc" href="know-your-rights/services/medical-debt.html"><div class="sm"><span>05 · Medical debt</span><span class="fit perfect">perfect fit</span></div><h3>Confused About Your Medical Debt?</h3><p>Our Attorneys Can Help You Know Your Rights and Act.</p></a>
+    <a class="svc" href="know-your-rights/services/garnishment.html"><div class="sm"><span>06 · Wage garnishment</span><span class="fit perfect">perfect fit</span></div><h3>Garnishment Looming?</h3><p>Our Attorneys Can Help You Stop It Before It Starts.</p></a>
+  </div>
+</div></section>
+<section class="hv"><div class="container">
+  <div class="eyebrow">Variant 06 · Outcome-focused: settle, exempt, remove</div>
+  <h2>Reduce or Remove</h2>
+  <p class="who">Someone past the urgent phase and past the &quot;is this legit?&quot; question. They want to reduce the number: settle, exempt, remove, recover.</p>
+  <div class="links"><a href="reduce-or-remove/index.html">Open the site →</a><a href="reduce-or-remove/about.html">About</a><a href="reduce-or-remove/terms-of-use.html">Terms of Use</a><a href="reduce-or-remove/privacy-policy.html">Privacy Policy</a><a href="reduce-or-remove/cookie-policy.html">Cookie Policy</a></div>
+  <div class="svc-grid">
+    <a class="svc" href="reduce-or-remove/services/harassment.html"><div class="sm"><span>01 · Collector harassment</span><span class="fit best">best fit</span></div><h3>Multiple Debt Collectors Harassing You?</h3><p>Harassment equivalent: combined damages from multiple collectors.</p></a>
+    <a class="svc" href="reduce-or-remove/services/lawsuit.html"><div class="sm"><span>02 · Debt lawsuit</span><span class="fit best">best fit</span></div><h3>Received a Lawsuit Summons?</h3><p>Lawsuit equivalent: &quot;know your options&quot; outcome framing.</p></a>
+    <a class="svc" href="reduce-or-remove/services/credit-card.html"><div class="sm"><span>03 · Credit card debt</span><span class="fit perfect">perfect fit</span></div><h3>Got Credit Card Debt?</h3><p>Credit card champion.</p></a>
+    <a class="svc" href="reduce-or-remove/services/payday-loan.html"><div class="sm"><span>04 · Payday loans</span><span class="fit best">best fit</span></div><h3>Payday Lenders Violating Your Rights?</h3><p>Payday equivalent: recovery for violations.</p></a>
+    <a class="svc" href="reduce-or-remove/services/medical-debt.html"><div class="sm"><span>05 · Medical debt</span><span class="fit perfect">perfect fit</span></div><h3>Chased for Medical Debt You Don't Recognize?</h3><p>Make them prove it — our attorneys challenge whether you owe the debt at all, and how much.</p></a>
+    <a class="svc" href="reduce-or-remove/services/garnishment.html"><div class="sm"><span>06 · Wage garnishment</span><span class="fit perfect">perfect fit</span></div><h3>Paycheck Already Garnished?</h3><p>You May Qualify for Exemptions. Our Attorneys Can Help.</p></a>
+  </div>
+</div></section>
+<div class="container hub-foot">Prototype for review. Forms do not send anything. The legal pages are drafts pending review by the firm's attorney.</div>
+</div></main>
 </body>
 </html>
