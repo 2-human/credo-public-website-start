@@ -1,4 +1,208 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"/><meta name="robots" content="noindex"/>
-<meta http-equiv="refresh" content="0; url=variants/"/><title>Credo Legal | Website prototype</title></head>
-<body><p><a href="variants/">Credo Legal website prototype: six variants</a></p></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Credo — start microsite prototypes (A / B / C)</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px; line-height: 1.5; color: #1a1a1a; background: #f7f7f6;
+  padding: 24px 16px 80px;
+}
+.wrap { max-width: 980px; margin: 0 auto; }
+h1 { font-size: 28px; line-height: 1.2; margin: 0 0 6px; color: #1a1a1a; }
+.sub { color: #555; font-size: 15px; margin: 0 0 28px; }
+.card-grid { display: grid; gap: 16px; grid-template-columns: 1fr; margin-bottom: 28px; }
+@media (min-width: 768px) { .card-grid { grid-template-columns: repeat(3, 1fr); } }
+.card {
+  background: white;
+  border: 1px solid #d6d6d4;
+  border-radius: 12px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.card .badge {
+  display: inline-block;
+  background: #DC4646;
+  color: white;
+  border-radius: 10px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  width: fit-content;
+}
+.card h2 { font-size: 17px; margin: 0; }
+.card .desc { color: #555; font-size: 13px; flex: 1; line-height: 1.55; }
+.card .pages {
+  list-style: none; margin: 8px 0 0; padding: 0;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4px;
+}
+.card .pages a {
+  font-size: 12px; padding: 4px 6px; border-radius: 4px;
+  color: #444; text-decoration: none; background: #f7f7f6; border: 1px solid #e6e6e4;
+}
+.card .pages a:hover { background: #1a1a1a; color: white; border-color: #1a1a1a; }
+.card .pages a.primary { background: #1a1a1a; color: white; grid-column: 1 / -1; text-align: center; padding: 9px; font-size: 13px; font-weight: 600; border-color: #1a1a1a; }
+.card .pages a.primary:hover { background: #DC4646; border-color: #DC4646; }
+
+.section { background: white; border: 1px solid #d6d6d4; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+.section h3 { font-size: 15px; margin: 0 0 8px; color: #DC4646; text-transform: uppercase; letter-spacing: 0.5px; }
+.section p { font-size: 14px; color: #1a1a1a; margin: 0 0 8px; line-height: 1.6; }
+.section ul { margin: 8px 0 0 18px; padding: 0; }
+.section li { font-size: 13px; color: #555; margin-bottom: 4px; line-height: 1.55; }
+.section code { background: #efefee; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-family: ui-monospace, "SF Mono", monospace; }
+a.brief-link { color: #DC4646; font-size: 13px; }
+.archive-link { color: #888; font-size: 12px; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<h1>start.credolegal.com — prototypes</h1>
+<p class="sub">Three prototype layers, each answering a different question. Pick the layer that matches what you're evaluating right now.</p>
+
+<div style="background:#131312;color:#FAFAF9;border-radius:12px;padding:18px 20px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+  <div>
+    <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#F4B942;font-weight:600;margin-bottom:4px">DESIGN SYSTEM</div>
+    <div style="font-size:16px;font-weight:600">Style guide — typography, color, components, illustrations</div>
+  </div>
+  <a href="style-guide.html" style="background:#DC4646;color:white;padding:10px 18px;border-radius:8px;font-weight:600;font-size:13px;text-decoration:none;white-space:nowrap">Open style guide →</a>
+</div>
+
+<div style="background:#fff8e6;border:1px solid #f4b942;border-radius:12px;padding:18px;margin-bottom:24px">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px">
+    <h2 style="font-size:18px;margin:0;color:#1a1a1a">🆕 6 angle-themed website variants</h2>
+    <a href="variants/index.html" style="background:#DC4646;color:white;padding:8px 14px;border-radius:6px;font-weight:600;font-size:13px;white-space:nowrap">Open the variants hub →</a>
+  </div>
+  <p style="font-size:14px;line-height:1.6;color:#1a1a1a;margin:0">Six complete websites (home + about + 6 service pages each), each themed around one rhetorical angle. Within each variant, every service page uses the LP from that cluster whose angle best fits the variant. All six share the locked D3 layout from brief 4. <strong>This is what you asked for on 2026-06-01.</strong></p>
+  <p style="font-size:12px;color:#888;margin:8px 0 0">Stop the Calls · Fight Back · Respond in Time · Demand Proof · Know Your Rights · Reduce or Remove</p>
+</div>
+
+<div style="background:#eef;border:1px solid #2563eb;border-radius:12px;padding:14px 18px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+  <div>
+    <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#2563eb;font-weight:600;margin-bottom:4px">A/B COMPARISON</div>
+    <div style="font-size:15px;font-weight:600;color:#1a1a1a">Action 15 — Borders on vs off (Vernon's note)</div>
+  </div>
+  <a href="compare-borders.html" style="background:#2563eb;color:white;padding:8px 14px;border-radius:6px;font-weight:600;font-size:13px;text-decoration:none;white-space:nowrap">Open comparison →</a>
+</div>
+
+<h2 style="font-size:18px;margin:24px 0 8px">Earlier prototypes (still here for reference)</h2>
+<p class="sub" style="margin-bottom:16px">The A/B/C variants compared three Services-nav structures; the /lps/ set was the raw 36 LPs in the locked D3 layout. Both are reachable from below.</p>
+
+<div class="card-grid">
+
+  <div class="card">
+    <span class="badge">A</span>
+    <h2>Overview-default</h2>
+    <p class="desc">Six cluster service pages built as overview / browse pages. Each carries a brief intro to the cluster, a menu of sub-services, and a lightweight contact form. Conversion happens after the visitor self-classifies.</p>
+    <div class="pages">
+      <a class="primary" href="a/index.html">Open Prototype A →</a>
+      <a href="a/index.html">Home</a>
+      <a href="a/about.html">About</a>
+      <a href="a/services/harassment.html">Harassment</a>
+      <a href="a/services/lawsuit.html">Lawsuit</a>
+      <a href="a/services/credit-card.html">Credit Card</a>
+      <a href="a/services/payday-loan.html">Payday Loan</a>
+      <a href="a/services/medical-debt.html">Medical Debt</a>
+      <a href="a/services/garnishment.html">Garnishment</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="badge">B</span>
+    <h2>Champion-default</h2>
+    <p class="desc">Six cluster service pages = the cluster's champion LP. Multi-step form, conversion-focused body, designed to convert visitors immediately. CC → Negotiate Down (33.3% conv), Lawsuit → Collection-Urgency (580+ conv), etc.</p>
+    <div class="pages">
+      <a class="primary" href="b/index.html">Open Prototype B →</a>
+      <a href="b/index.html">Home</a>
+      <a href="b/about.html">About</a>
+      <a href="b/services/harassment.html">Harassment</a>
+      <a href="b/services/lawsuit.html">Lawsuit</a>
+      <a href="b/services/credit-card.html">Credit Card</a>
+      <a href="b/services/payday-loan.html">Payday Loan</a>
+      <a href="b/services/medical-debt.html">Medical Debt</a>
+      <a href="b/services/garnishment.html">Garnishment</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="badge">C</span>
+    <h2>Hybrid</h2>
+    <p class="desc">Six cluster service pages = champion hero + multi-step form (Option B's conversion strength) plus an "all options in this cluster" menu visible below the fold (Option A's browse path). Two paths into engagement from one page.</p>
+    <div class="pages">
+      <a class="primary" href="c/index.html">Open Prototype C →</a>
+      <a href="c/index.html">Home</a>
+      <a href="c/about.html">About</a>
+      <a href="c/services/harassment.html">Harassment</a>
+      <a href="c/services/lawsuit.html">Lawsuit</a>
+      <a href="c/services/credit-card.html">Credit Card</a>
+      <a href="c/services/payday-loan.html">Payday Loan</a>
+      <a href="c/services/medical-debt.html">Medical Debt</a>
+      <a href="c/services/garnishment.html">Garnishment</a>
+    </div>
+  </div>
+
+</div>
+
+<div class="section">
+  <h3>What's the same across all three</h3>
+  <p>The header nav has the same shape: Home / Services (dropdown with 6 clusters) / About. The mobile drilldown menu carries the same items. The footer (utility links + phone numbers + disclaimer) is identical. The locked LP layout from <a class="brief-link" href="../../content/web/sites/start-redesign/brief/4-lp-template.md">brief 4</a> applies in all three: sticky CTA bar with same-row Tidio launcher, trust marks band, mobile-first responsive at 768px. Each option's about page is identical.</p>
+</div>
+
+<div class="section">
+  <h3>What's different per option</h3>
+  <p>The Services dropdown in the nav links to the same 6 cluster slugs across all three (e.g., <code>/services/harassment</code>). The page that renders at that URL differs:</p>
+  <ul>
+    <li><strong>A — Overview:</strong> a browse-oriented overview of the cluster. Intro paragraph, list of sub-services, light contact form. The visitor self-classifies before engaging.</li>
+    <li><strong>B — Champion LP:</strong> the cluster's champion LP. Conversion-focused hero, multi-step form, full LP body. Built to convert immediately.</li>
+    <li><strong>C — Hybrid:</strong> champion hero plus a visible "all options in this cluster" menu further down the page. Champion-first, browse-second.</li>
+  </ul>
+  <p>The home page also differs subtly: cluster tile microcopy varies by option to set the visitor's expectation about what they'll land on.</p>
+</div>
+
+<div class="section">
+  <h3>How to test</h3>
+  <p>Open each prototype's home page and click through to a service. Compare what happens between A, B, and C on the same cluster (e.g., open <code>a/services/credit-card.html</code> next to <code>b/services/credit-card.html</code> next to <code>c/services/credit-card.html</code> — three browser tabs). Each variant ribbon at the top of every page lets you switch options on the current page without going back to this hub. Use your browser's device emulator at 390×844 (iPhone-class) to check the mobile-first design.</p>
+</div>
+
+<div class="section">
+  <h3>Content sourcing</h3>
+  <p>Cluster service pages now render the live LP content from start.credolegal.com for each cluster (vs. earlier placeholder copy). Three clusters are captured directly from the live LPs; three are inferred from common patterns plus the campaign plan and need validation against the live LP. Pages with inferred content display a red caveat banner at the bottom flagging the source.</p>
+  <ul>
+    <li><strong>Captured from live LP:</strong> Harassment (<code>/debt-harassment-fdcpa-rights</code>), Lawsuit (<code>/debt-lawsuit-respond-on-time</code>), Credit Card (<code>/credit-cards</code>)</li>
+    <li><strong>Inferred (validate before locking):</strong> Payday Loan (<code>/payday-loan-lawsuit-respond</code>), Medical Debt (<code>/medica-debt-lawsuit-respond</code>), Garnishment (<code>/stop-wage-garnishment</code>)</li>
+  </ul>
+  <p>Per-LP phone routing numbers come from the live LPs: Lawsuit uses <code>(212) 561-5902</code>, Credit Card uses <code>(347) 474-9602</code>, others use the new-client mainline <code>(443) 483-4080</code>. The footer "existing clients" phone bug flagged in the <a class="brief-link" href="../../content/internal/planning/2026-05-17-lp-funnel-action-items.md">May action items</a> §1 is preserved in the prototype since we kept original content.</p>
+</div>
+
+<div class="section">
+  <h3>36 angle landing pages (new)</h3>
+  <p>The 36 angle LPs from the campaign plan are now rendered in the locked D3 layout from <a class="brief-link" href="../../content/web/sites/start-redesign/brief/4-lp-template.md">brief 4</a>, using verbatim copy from the <a class="brief-link" href="../../content/landing-pages/live-captures/INDEX.md">live captures</a>. 31 LPs use their own captured content; 4 share live URLs and render the canonical content with a banner; 1 (MedDebt-Lawsuit VarA Urgency) is a coming-soon placeholder for the documented 404 URL.</p>
+  <p><a href="lps/index.html" style="display:inline-block;background:#DC4646;color:white;padding:10px 18px;border-radius:8px;font-weight:600;font-size:13px;margin-top:6px;">Browse all 36 LPs →</a></p>
+  <ul>
+    <li><a href="lps/harassment/index.html">Harassment</a> (7 LPs)</li>
+    <li><a href="lps/lawsuit/index.html">Lawsuit</a> (6 LPs)</li>
+    <li><a href="lps/credit-card/index.html">Credit Card</a> (6 LPs)</li>
+    <li><a href="lps/payday-loan/index.html">Payday Loan</a> (6 LPs)</li>
+    <li><a href="lps/medical-debt/index.html">Medical Debt</a> (6 LPs, including 1 coming-soon placeholder)</li>
+    <li><a href="lps/garnishment/index.html">Garnishment</a> (5 LPs)</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h3>What's still placeholder</h3>
+  <p>The multi-step form is a single-step stub showing the visual structure only (the user said the real form spec comes in a later iteration). The chatbot launcher is a static blue circle, not a live Tidio embed. The trust marks band shows three pill badges instead of real BBB / Trustpilot / Google embeds (compliance review pending per May action items §4). Images from the live LPs are not included yet (the user said images can stay as-is for now).</p>
+</div>
+
+<p class="archive-link">Earlier single-page prototype attempts (each showed all 36 angle sub-items inline) are preserved at <code>archive/</code> for historical reference.</p>
+
+</div>
+
+</body>
+</html>

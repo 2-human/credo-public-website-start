@@ -1,22 +1,36 @@
-<!doctype html>
-<html lang="en" data-labels="plain" data-borders="off" data-hero-style="portrait">
+<!DOCTYPE html>
+<html lang="en" data-asset-base="../../../">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Received a Lawsuit Summons? | Credo Legal</title>
-<meta name="description" content="Our Attorneys Can Help You Make Sense of It and Act."/>
-<meta name="robots" content="noindex"/>
-<link rel="preload" href="../../../lp/assets/fonts/HankenGrotesk-latin.woff2" as="font" type="font/woff2" crossorigin/>
-<link rel="stylesheet" href="../../../lp/tokens.css"/>
-<link rel="stylesheet" href="../../../lp/lp.css"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lawsuit — Reduce or Remove — Credo Legal</title>
+<link rel="stylesheet" href="../../../shared/style.css">
 </head>
 <body>
-<div id="root"></div>
-<script src="../../../lp/content-lawsuit-options.js"></script>
-<script src="../../../shared/site-data.js"></script>
-<script src="../../../shared/site.js"></script>
-<script>CredoSite.prepare({"variant":"reduce-or-remove","page":"service","cluster":"lawsuit","root":"../../../","base":"../"});</script>
-<script src="../../../lp/app.js"></script>
-<script>CredoSite.render();</script>
+<div id="app"></div>
+
+<script>
+window.addEventListener('error', function(e) {
+  var app = document.getElementById('app');
+  if (!app) return;
+  if (app.innerHTML.length > 100) return;
+  app.innerHTML = '<div style="padding:24px;font-family:monospace;background:#fee;border:2px solid #c33;margin:20px;border-radius:8px;line-height:1.5">'
+    + '<h2 style="margin-top:0;color:#c33">JS error caught</h2>'
+    + '<p><strong>Message:</strong> ' + (e.message || '(no message)') + '</p>'
+    + '<p><strong>Source:</strong> ' + (e.filename || '(unknown)') + ' line ' + (e.lineno || '?') + '</p>'
+    + '<p><strong>Stack:</strong></p><pre style="background:white;padding:10px;border-radius:4px;overflow:auto;font-size:12px">' + (e.error && e.error.stack ? e.error.stack.replace(/[<>]/g, '?') : '(no stack)') + '</pre>'
+    + '<p style="color:#888;font-size:12px">window.LP_CONTENT: <code>' + (typeof window.LP_CONTENT !== 'undefined') + '</code> | window.VARIANTS: <code>' + (typeof window.VARIANTS !== 'undefined') + '</code> | window.renderVariantPage: <code>' + (typeof window.renderVariantPage !== 'undefined') + '</code></p>'
+    + '</div>';
+});
+</script>
+<script src="../../../shared/data.js"></script>
+<script src="../../../shared/lp-content.js"></script>
+<script src="../../../shared/variants.js"></script>
+<script src="../../../shared/lp-template.js"></script>
+<script src="../../../shared/variant-template.js"></script>
+<script>
+try { renderVariantPage({ variant: 'reduce-or-remove', type: 'service', cluster: 'lawsuit', base: '../' }); }
+catch (err) { document.getElementById('app').innerHTML = '<div style="padding:24px;color:#c33;font-family:monospace"><h2>renderVariantPage threw</h2><p>' + err.message + '</p><pre>' + (err.stack||'').replace(/[<>]/g,'?') + '</pre></div>'; }
+</script>
 </body>
 </html>

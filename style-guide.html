@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Style Guide — Credo Legal Design System</title>
+<link rel="stylesheet" href="shared/style.css">
+<style>
+  body { padding: 0; margin: 0; }
+  .sg-wrap { max-width: 1100px; margin: 0 auto; padding: 24px 20px 80px; }
+  .sg-section { margin-bottom: 56px; }
+  .sg-section h2 {
+    font-size: var(--fs-h2); margin: 0 0 16px;
+    padding-bottom: 12px; border-bottom: 1px solid var(--border);
+  }
+  .sg-section h3 { font-size: var(--fs-h3); margin: 28px 0 12px; color: var(--text); }
+  .sg-section .lead { color: var(--text-muted); font-size: var(--fs-body); margin: 0 0 24px; max-width: 720px; }
+  .sg-grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
+  @media (min-width: 700px) { .sg-grid.cols-2 { grid-template-columns: 1fr 1fr; } .sg-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; } .sg-grid.cols-4 { grid-template-columns: 1fr 1fr 1fr 1fr; } }
+
+  /* Color swatches */
+  .swatch { border: 1px solid var(--border-faint); border-radius: var(--radius-md); padding: 0; overflow: hidden; background: var(--bg); }
+  .swatch .chip { height: 80px; }
+  .swatch .meta { padding: 12px 14px; }
+  .swatch .name { font-weight: 600; font-size: var(--fs-small); color: var(--text); }
+  .swatch .hex { font-family: ui-monospace, "SF Mono", monospace; color: var(--text-muted); font-size: var(--fs-caption); margin-top: 2px; }
+
+  /* Type ladder */
+  .type-row { display: flex; align-items: baseline; gap: 24px; padding: 16px 0; border-bottom: 1px solid var(--border-faint); }
+  .type-row .label { font-size: var(--fs-caption); text-transform: uppercase; letter-spacing: var(--tracking-wide); color: var(--text-faint); width: 110px; font-weight: 600; flex-shrink: 0; }
+  .type-row .sample { color: var(--text); }
+
+  /* Token row */
+  .token-row { display: flex; gap: 16px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border-faint); font-size: var(--fs-small); }
+  .token-row code { background: var(--gray-100); padding: 2px 8px; border-radius: var(--radius-sm); font-family: ui-monospace, monospace; font-size: 12px; }
+  .token-row .preview { flex: 1; display: flex; justify-content: flex-end; }
+
+  /* Component preview frames */
+  .preview-frame { padding: 24px; background: var(--bg-surface); border: 1px solid var(--border-faint); border-radius: var(--radius-lg); display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: center; }
+  .preview-frame.dark { background: var(--gray-900); }
+  .preview-frame.tight { padding: 16px; }
+
+  .sg-toc { position: sticky; top: 0; background: var(--bg); border-bottom: 1px solid var(--border-faint); padding: 12px 20px; z-index: 10; display: flex; gap: 18px; overflow-x: auto; font-size: var(--fs-small); }
+  .sg-toc a { color: var(--text-muted); white-space: nowrap; }
+  .sg-toc a:hover { color: var(--brand); }
+  .sg-toc strong { color: var(--text); margin-right: 8px; }
+
+  .spacing-bar { background: var(--brand); height: 24px; border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<nav class="sg-toc">
+  <strong>Style guide</strong>
+  <a href="#typography">Typography</a>
+  <a href="#color">Color</a>
+  <a href="#spacing">Spacing</a>
+  <a href="#radii">Radii</a>
+  <a href="#shadows">Shadows</a>
+  <a href="#buttons">Buttons</a>
+  <a href="#form">Form</a>
+  <a href="#trustband">Trust band</a>
+  <a href="#illustrations">Illustrations</a>
+  <a href="index.html" style="margin-left: auto;">← Back to prototype hub</a>
+</nav>
+
+<div class="sg-wrap">
+
+<header class="sg-section">
+  <p style="font-size:var(--fs-caption); text-transform:uppercase; letter-spacing:var(--tracking-wide); color:var(--text-faint); margin:0 0 8px">Credo Legal</p>
+  <h1 style="font-size:var(--fs-display); margin:0 0 12px">Design system</h1>
+  <p class="lead">Visual language for the start.credolegal.com redesign. Tokens are CSS custom properties defined in <code>shared/style.css</code> and consumed everywhere downstream — the 36 LPs, the 6 angle-themed variants, and any future page. Swap a token, every page changes.</p>
+</header>
+
+<!-- ========== TYPOGRAPHY ========== -->
+<section id="typography" class="sg-section">
+  <h2>Typography</h2>
+  <p class="lead">Inter, weights 400 / 500 / 600 / 700, loaded from Google Fonts. Sized via CSS custom properties; mobile defaults at the root, desktop sizes override at <code>min-width: 768px</code>.</p>
+
+  <h3>Type ladder</h3>
+  <div>
+    <div class="type-row"><span class="label">display</span><span class="sample" style="font-size:var(--fs-display); line-height:var(--lh-tight); letter-spacing:var(--tracking-tighter); font-weight:700">Stop the calls. Today.</span></div>
+    <div class="type-row"><span class="label">h1 — 28/36</span><span class="sample" style="font-size:var(--fs-h1); line-height:var(--lh-tight); letter-spacing:var(--tracking-tight); font-weight:700">End the harassment.</span></div>
+    <div class="type-row"><span class="label">h2 — 22/26</span><span class="sample" style="font-size:var(--fs-h2); line-height:var(--lh-snug); letter-spacing:var(--tracking-tight); font-weight:700">Why Choose Credo Legal</span></div>
+    <div class="type-row"><span class="label">h3 — 18</span><span class="sample" style="font-size:var(--fs-h3); line-height:var(--lh-snug); font-weight:600">Frequently Asked Questions</span></div>
+    <div class="type-row"><span class="label">body-lg — 17</span><span class="sample" style="font-size:var(--fs-body-lg); line-height:var(--lh-relaxed)">Our attorneys send the legal notice that ends it. Same-day cease letters, federal-law protection, attorneys licensed in your state.</span></div>
+    <div class="type-row"><span class="label">body — 15</span><span class="sample" style="font-size:var(--fs-body); line-height:var(--lh-relaxed)">A free consultation takes 10 minutes. We can tell you whether the lawsuit has problems before you respond.</span></div>
+    <div class="type-row"><span class="label">small — 13</span><span class="sample" style="font-size:var(--fs-small); line-height:var(--lh-normal); color:var(--text-muted)">Attorney Advertising. Prior results do not guarantee a similar outcome.</span></div>
+    <div class="type-row"><span class="label">caption — 11</span><span class="sample" style="font-size:var(--fs-caption); text-transform:uppercase; letter-spacing:var(--tracking-wide); color:var(--text-faint); font-weight:600">ACCREDITED BUSINESS · FDCPA SPECIALISTS</span></div>
+  </div>
+</section>
+
+<!-- ========== COLOR ========== -->
+<section id="color" class="sg-section">
+  <h2>Color</h2>
+  <p class="lead">Brand red anchors action; charcoal scale anchors content. Amber and info blue are accent / semantic colors. Every interactive element resolves to a brand or charcoal token, with hover / focus states defined per component.</p>
+
+  <h3>Brand</h3>
+  <div class="sg-grid cols-4">
+    <div class="swatch"><div class="chip" style="background:var(--brand-50)"></div><div class="meta"><div class="name">brand-50</div><div class="hex">#FCE9E9</div></div></div>
+    <div class="swatch"><div class="chip" style="background:var(--brand-100)"></div><div class="meta"><div class="name">brand-100</div><div class="hex">#F8C7C7</div></div></div>
+    <div class="swatch"><div class="chip" style="background:var(--brand)"></div><div class="meta"><div class="name">brand · primary</div><div class="hex">#DC4646</div></div></div>
+    <div class="swatch"><div class="chip" style="background:var(--brand-600)"></div><div class="meta"><div class="name">brand-600 · hover</div><div class="hex">#C13838</div></div></div>
+    <div class="swatch"><div class="chip" style="background:var(--brand-700)"></div><div class="meta"><div class="name">brand-700 · active</div><div class="hex">#A52C2C</div></div></div>
+    <div class="swatch"><div class="chip" style="background:var(--brand-300)"></div><div class="meta"><div class="name">brand-300</div><div class="hex">#ED7676</div></div></div>
+  </div>
+
+  <h3>Neutrals (charcoal scale)</h3>
+  <div class="sg-grid cols-4">
+    <div class="swatch"><div class="chip" style="background:var(--gray-50); border-bottom:1px solid var(--border-faint)"></div><div class="meta"><div class="name">gray-50</div><div class="hex">#FAFAF9</div></div></div>
+    <div class="swatch"><div class="chip" style="background:var(--gray-100)"></div><div class="meta"><div class="name">gray-100</div><div class="hex">#F4F4F2</div></div></div>
+    <div class="swatch"><div class="chip" style="background:var(--gray-200)"></div><div class="meta"><div class="name">gray-200</div><div class="hex">#E8E8E5</div></div></div>
+    <div class="swatch"><div class="chip" style="background:var(--gray-300)"></div><div class="meta"><div class="name">gray-300</div><div class="hex">#D6D6D2</div></div></div>
+    <div class="swatch"><div class="chip" style="background:var(--gray-400)"></div><div class="meta"><div class="name">gray-400</div><div class="hex">#B1B1AC</div></div></div>
+    <div class="swatch"><div class="chip" style="background:var(--gray-500)"></div><div class="meta"><div class="name">gray-500 · faint text</div><div class="hex">#888884</div></div></div>
+    <div class="swatch"><div class="chip" style="background:var(--gray-600)"></div><div class="meta"><div class="name">gray-600 · muted text</div><div class="hex">#5F5F5C</div></div></div>
+    <div class="swatch"><div class="chip" style="background:var(--gray-900)"></div><div class="meta"><div class="name">gray-900 · text</div><div class="hex">#131312</div></div></div>
+  </div>
+
+  <h3>Accent &amp; semantic</h3>
+  <div class="sg-grid cols-4">
+    <div class="swatch"><div class="chip" style="background:var(--amber)"></div><div class="meta"><div class="name">amber</div><div class="hex">#F4B942</div></div></div>
+    <div class="swatch"><div class="chip" style="background:var(--amber-bg)"></div><div class="meta"><div class="name">amber-bg</div><div class="hex">#FEF6E0</div></div></div>
+    <div class="swatch"><div class="chip" style="background:var(--info)"></div><div class="meta"><div class="name">info</div><div class="hex">#2563EB</div></div></div>
+    <div class="swatch"><div class="chip" style="background:var(--success)"></div><div class="meta"><div class="name">success</div><div class="hex">#2D8659</div></div></div>
+  </div>
+</section>
+
+<!-- ========== SPACING ========== -->
+<section id="spacing" class="sg-section">
+  <h2>Spacing</h2>
+  <p class="lead">4-pixel base scale. Use semantic tokens (<code>--space-3</code>) instead of raw pixels so vertical rhythm stays consistent across components.</p>
+
+  <div>
+    <div class="token-row"><code>--space-1</code> <span>4px</span> <div class="preview"><div class="spacing-bar" style="width:4px"></div></div></div>
+    <div class="token-row"><code>--space-2</code> <span>8px</span> <div class="preview"><div class="spacing-bar" style="width:8px"></div></div></div>
+    <div class="token-row"><code>--space-3</code> <span>12px</span> <div class="preview"><div class="spacing-bar" style="width:12px"></div></div></div>
+    <div class="token-row"><code>--space-4</code> <span>16px</span> <div class="preview"><div class="spacing-bar" style="width:16px"></div></div></div>
+    <div class="token-row"><code>--space-5</code> <span>24px</span> <div class="preview"><div class="spacing-bar" style="width:24px"></div></div></div>
+    <div class="token-row"><code>--space-6</code> <span>32px</span> <div class="preview"><div class="spacing-bar" style="width:32px"></div></div></div>
+    <div class="token-row"><code>--space-7</code> <span>48px</span> <div class="preview"><div class="spacing-bar" style="width:48px"></div></div></div>
+    <div class="token-row"><code>--space-8</code> <span>64px</span> <div class="preview"><div class="spacing-bar" style="width:64px"></div></div></div>
+  </div>
+</section>
+
+<!-- ========== RADII ========== -->
+<section id="radii" class="sg-section">
+  <h2>Radii</h2>
+  <div class="sg-grid cols-4">
+    <div class="preview-frame"><div style="width:80px;height:80px;background:var(--brand);border-radius:var(--radius-sm)"></div><code>--radius-sm · 4px</code></div>
+    <div class="preview-frame"><div style="width:80px;height:80px;background:var(--brand);border-radius:var(--radius-md)"></div><code>--radius-md · 8px</code></div>
+    <div class="preview-frame"><div style="width:80px;height:80px;background:var(--brand);border-radius:var(--radius-lg)"></div><code>--radius-lg · 12px</code></div>
+    <div class="preview-frame"><div style="width:80px;height:80px;background:var(--brand);border-radius:var(--radius-pill)"></div><code>--radius-pill</code></div>
+  </div>
+</section>
+
+<!-- ========== SHADOWS ========== -->
+<section id="shadows" class="sg-section">
+  <h2>Shadows</h2>
+  <div class="sg-grid cols-4">
+    <div class="preview-frame"><div style="width:80px;height:80px;background:var(--bg);border-radius:var(--radius-md);box-shadow:var(--shadow-sm)"></div><code>shadow-sm</code></div>
+    <div class="preview-frame"><div style="width:80px;height:80px;background:var(--bg);border-radius:var(--radius-md);box-shadow:var(--shadow-md)"></div><code>shadow-md</code></div>
+    <div class="preview-frame"><div style="width:80px;height:80px;background:var(--bg);border-radius:var(--radius-md);box-shadow:var(--shadow-lg)"></div><code>shadow-lg</code></div>
+    <div class="preview-frame"><div style="width:80px;height:80px;background:var(--brand);border-radius:var(--radius-md);box-shadow:var(--shadow-brand)"></div><code>shadow-brand</code></div>
+  </div>
+</section>
+
+<!-- ========== BUTTONS ========== -->
+<section id="buttons" class="sg-section">
+  <h2>Buttons</h2>
+  <p class="lead">Primary CTA uses brand red with shadow + hover lift. Secondary is dark charcoal. All buttons meet 48px tap-target on mobile.</p>
+
+  <h3>Primary CTA</h3>
+  <div class="preview-frame">
+    <a href="#" class="cta" style="display:inline-block;background:var(--brand);color:var(--text-on-dark);padding:14px 28px;border-radius:var(--radius-md);font-weight:600;font-size:var(--fs-body-lg);box-shadow:var(--shadow-brand)">Get a Free Case Evaluation</a>
+  </div>
+
+  <h3>Secondary (dark)</h3>
+  <div class="preview-frame">
+    <a href="#" style="display:inline-block;background:var(--gray-900);color:var(--text-on-dark);padding:14px 28px;border-radius:var(--radius-md);font-weight:500;font-size:var(--fs-body)">Or Call Now (212) 461-4026</a>
+  </div>
+
+  <h3>Header button</h3>
+  <div class="preview-frame">
+    <a href="#" style="display:inline-block;background:var(--brand);color:var(--text-on-dark);padding:9px 18px;border-radius:var(--radius-md);font-weight:600;font-size:var(--fs-small);letter-spacing:var(--tracking-tight)">Free Case Review</a>
+  </div>
+
+  <h3>Mobile sticky CTA</h3>
+  <div class="preview-frame dark">
+    <div style="display:flex;gap:8px;width:100%;max-width:380px">
+      <a href="#" style="flex:1;text-align:center;background:var(--brand);color:var(--text-on-dark);padding:14px 18px;border-radius:var(--radius-pill);font-weight:600;font-size:var(--fs-body);box-shadow:var(--shadow-brand);min-height:48px;display:flex;align-items:center;justify-content:center">Get a Free Case Evaluation</a>
+      <a href="#" style="flex-shrink:0;background:var(--gray-900);color:var(--text-on-dark);width:48px;height:48px;border-radius:var(--radius-pill);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-md)">📞</a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FORM ========== -->
+<section id="form" class="sg-section">
+  <h2>Form</h2>
+  <p class="lead">Multi-step form with progress chip indicator. Brand-red active step, neutral inactive. Slider thumb has brand-red ring and shadow.</p>
+
+  <section class="lp-form" style="max-width:480px">
+    <div class="form-steps">
+      <div class="step active"><div class="step-n">1</div><div class="step-l">Debt Estimate</div></div>
+      <div class="step"><div class="step-n">2</div><div class="step-l">Personalization</div></div>
+      <div class="step"><div class="step-n">3</div><div class="step-l">Personal Info</div></div>
+    </div>
+    <h3>How Much Debt Do You Currently Have?</h3>
+    <input type="range" min="0" max="100000" value="10000" class="slider">
+    <div class="form-actions">
+      <button type="button" class="primary">Continue</button>
+      <a href="tel:+12124614026" class="phone">Or Call Now (212) 461-4026</a>
+    </div>
+  </section>
+</section>
+
+<!-- ========== TRUST BAND ========== -->
+<section id="trustband" class="sg-section">
+  <h2>Trust band</h2>
+  <p class="lead">Three social-proof widgets approximating BBB, Trustpilot, and Google Reviews. Real embeds replace these once compliance review clears (May action items §4).</p>
+
+  <div id="trustband-preview"></div>
+  <p style="font-size:var(--fs-caption);color:var(--text-faint);margin-top:8px">Two placements per LP: above the body sections (without metrics) and after How Our Program Works (with the metrics row).</p>
+  <div id="trustband-preview-metrics" style="margin-top:16px"></div>
+</section>
+
+<!-- ========== ILLUSTRATIONS ========== -->
+<section id="illustrations" class="sg-section">
+  <h2>Illustrations</h2>
+  <p class="lead">Brand-coordinated SVG illustration system. Seven motif families: hero (architectural columns), shield (Why Choose), document (Common Problems), people (Who This Helps), book + gavel (Your Rights), conversation (FAQ), process (How It Works). Each motif picks a brand-coordinated palette by hash so the same caller always gets the same color treatment.</p>
+  <div class="sg-grid cols-2" id="illustration-preview"></div>
+</section>
+
+</div>
+
+<script src="shared/data.js"></script>
+<script src="shared/lp-content.js"></script>
+<script src="shared/lp-template.js"></script>
+<script>
+  // Render the trust band previews using the real renderer
+  document.getElementById('trustband-preview').innerHTML = window.__renderTrustBand();
+  document.getElementById('trustband-preview-metrics').innerHTML = window.__renderTrustBand({ withMetrics: true });
+
+  // Render illustration previews
+  const motifs = [
+    { label: 'Hero: end the harassment', w: 480, h: 320 },
+    { label: 'Why Choose Credo — shield motif', w: 480, h: 320 },
+    { label: 'Common Problems — document motif', w: 480, h: 320 },
+    { label: 'Who This Helps — diverse clients', w: 480, h: 320 },
+    { label: 'Your Federal Rights — law book and gavel', w: 480, h: 320 },
+    { label: 'FAQ — conversation in office', w: 480, h: 320 },
+  ];
+  const motifHTML = motifs.map(m =>
+    `<div class="preview-frame tight" style="padding:8px;background:var(--bg)">
+       <div style="width:100%;border-radius:var(--radius-md);overflow:hidden;line-height:0">${window.__imagePlaceholder(m.label, { w: m.w, h: m.h })}</div>
+     </div>`
+  ).join('');
+  document.getElementById('illustration-preview').innerHTML = motifHTML;
+</script>
+
+</body>
+</html>

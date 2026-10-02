@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" data-variant="B">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Credo — Services nav prototype B (champion-default)</title>
+<link rel="stylesheet" href="../shared/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="logo">CRĒDO</a>
+  <ul id="desktop-nav" class="desktop-nav"></ul>
+  <div class="header-actions">
+    <a href="#" class="book-btn">Book Consult</a>
+    <button id="menu-btn" class="menu-btn" aria-label="Open menu">☰</button>
+  </div>
+</header>
+
+<div class="variant-ribbon">
+  <div><strong>Prototype B</strong> — champion-default. Cluster click → cluster's highest-converting LP.</div>
+  <div class="switcher">
+    <a href="nav-a-overview.html">A</a>
+    <a href="nav-b-champion.html" class="active">B</a>
+    <a href="nav-c-hybrid.html">C</a>
+  </div>
+</div>
+
+<div class="ctx-selector" id="ctx-current-wrap">
+  <label for="ctx-current">Current page context (drives sibling cross-mapping):</label>
+  <select id="ctx-current"></select>
+  <small>When a page context is set, cluster clicks route to angle-matched LPs in the sibling cluster (not the champion). When no context is set, cluster clicks route to each cluster's champion LP (Option B fallback).</small>
+</div>
+
+<main class="page-body">
+  <section class="hero">
+    <h1>Services nav · Prototype B</h1>
+    <p>Tap a cluster name in the nav to see the "would navigate to" toast — under Option B with no angle context, every click goes to that cluster's champion LP (CC → Negotiate Down at 33.3% conv, Lawsuit → Collection-Urgency at 580+ conv, etc.). Set a page context above to see the angle cross-mapping take over.</p>
+  </section>
+
+  <div class="trust-band">
+    <span class="pill">BBB · 4.59</span>
+    <span class="pill">Trustpilot · 4.5</span>
+    <span class="pill">Google Reviews</span>
+  </div>
+
+  <div class="placeholder-section"><strong>What We Do</strong>Page body placeholder. Same page chrome as Prototype A; only the nav-click behavior differs.</div>
+  <div class="placeholder-section"><strong>Why Choose Credo Legal</strong>Page body placeholder.</div>
+  <div class="placeholder-section"><strong>Common Problems</strong>Page body placeholder.</div>
+  <div class="placeholder-section"><strong>How Our Program Works</strong>Page body placeholder.</div>
+  <div class="placeholder-section"><strong>Your Rights</strong>Page body placeholder.</div>
+  <div class="placeholder-section"><strong>FAQ</strong>Page body placeholder.</div>
+</main>
+
+<div class="sticky-bar">
+  <a href="#" class="cta">Get a Free Case Evaluation</a>
+  <div class="chat" aria-label="Open chat"><span>💬</span><span class="badge">2</span></div>
+</div>
+
+<div id="nav-overlay" class="nav-overlay">
+  <div class="nav-overlay-header">
+    <button class="back">‹ Back</button>
+    <div class="nav-overlay-title">Menu</div>
+    <button class="close" aria-label="Close">×</button>
+  </div>
+  <ul class="nav-list"></ul>
+</div>
+
+<div id="dest-toast" class="dest-toast"></div>
+
+<script src="../shared/data.js"></script>
+<script src="../shared/nav.js"></script>
+</body>
+</html>

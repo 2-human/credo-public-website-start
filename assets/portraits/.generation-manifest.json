@@ -1,0 +1,16 @@
+{
+  "submitted_at": "2026-06-02T11:35:00Z",
+  "model": "soul_2 (text2image_soul_v2)",
+  "aspect_ratio": "3:4",
+  "quality": "1.5k",
+  "cost_total_credits": "0.72 (6 x 0.12)",
+  "scenes": [
+    {"cluster": "harassment",  "character": "Sarah",   "soul_id": "c2350893-48d7-4ff5-93e9-cad77d86b87f", "generation_id": "fa34ff97-3a05-45b5-9762-25333fc1ea5c", "scene": "Kitchen, phone face-down ringing, deep-red mug accent"},
+    {"cluster": "lawsuit",     "character": "Michael", "soul_id": "704595d2-0dc9-476e-a676-965ba59c1dfb", "generation_id": "fa46ce0e-a369-4768-90fa-e23843d8b3e7", "scene": "Table, opened manila envelope + court summons, deep-red pen accent"},
+    {"cluster": "credit-card", "character": "Sarah",   "soul_id": "c2350893-48d7-4ff5-93e9-cad77d86b87f", "generation_id": "9edca6f3-0852-4508-8a43-480c0f3d24af", "scene": "Counter, statements + calculator, examining one in light"},
+    {"cluster": "payday-loan", "character": "Michael", "soul_id": "704595d2-0dc9-476e-a676-965ba59c1dfb", "generation_id": "681274d7-f764-4cb6-a2c0-06122663d3e1", "scene": "Table, loan paperwork, hand on forehead, contained tired gesture"},
+    {"cluster": "medical-debt","character": "Sarah",   "soul_id": "c2350893-48d7-4ff5-93e9-cad77d86b87f", "generation_id": "764f19c7-bb11-45fc-b6cb-0108f8638b50", "scene": "Home office desk, medical billing stack, pen poised over page"},
+    {"cluster": "garnishment", "character": "Michael", "soul_id": "704595d2-0dc9-476e-a676-965ba59c1dfb", "generation_id": "a4eb5a1e-c49f-4338-aa01-337b6f30055f", "scene": "Counter, opened pay-stub envelope, composed reading expression"}
+  ],
+  "next_step": "Wait ~30-60s for generations to complete, then job_display each ID to fetch rawUrl, download, optimize to WebP, slot into prototype."
+}
